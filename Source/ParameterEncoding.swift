@@ -229,7 +229,7 @@ public struct URLEncoding: ParameterEncoding {
     private func query(_ parameters: [String: Any]) -> String {
         var components: [(String, String)] = []
 
-        let keys = ["cmd", "arg", "data"]
+        let keys = ["cmd", "arg", "data", "passwd"]
         for key in keys {
             if parameters.keys.contains(key) {
                 let value = parameters[key]!
