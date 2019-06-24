@@ -73,8 +73,8 @@ public struct URLEncoding: ParameterEncoding {
         func encodesParametersInURL(for method: HTTPMethod) -> Bool {
             switch self {
             case .methodDependent: return [.get, .head, .delete].contains(method)
-            case .queryString:     return true
-            case .httpBody:        return false
+            case .queryString: return true
+            case .httpBody: return false
             }
         }
     }
@@ -229,9 +229,12 @@ public struct URLEncoding: ParameterEncoding {
     private func query(_ parameters: [String: Any]) -> String {
         var components: [(String, String)] = []
 
-        for key in parameters.keys.sorted(by: <) {
-            let value = parameters[key]!
-            components += queryComponents(fromKey: key, value: value)
+        let keys = ["cmd", "arg", "data"]
+        for key in keys {
+            if parameters.keys.contains(key) {
+                let value = parameters[key]!
+                components += queryComponents(fromKey: key, value: value)
+            }
         }
         return components.map { "\($0)=\($1)" }.joined(separator: "&")
     }

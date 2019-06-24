@@ -105,13 +105,15 @@ class URLParameterEncodingTestCase: ParameterEncodingTestCase {
     func testURLParameterEncodeTwoStringKeyStringValueParameters() {
         do {
             // Given
-            let parameters = ["foo": "bar", "baz": "qux"]
+//            let parameters = ["foo": "bar", "baz": "qux"]
+            let parameters = ["cmd": "0xA0F2", "arg": "1"]
 
             // When
             let urlRequest = try encoding.encode(self.urlRequest, with: parameters)
 
             // Then
-            XCTAssertEqual(urlRequest.url?.query, "baz=qux&foo=bar")
+//            XCTAssertEqual(urlRequest.url?.query, "baz=qux&foo=bar")
+            XCTAssertEqual(urlRequest.url?.query, "cmd=0xA0F2&arg=1")
         } catch {
             XCTFail("Test encountered unexpected error: \(error)")
         }
